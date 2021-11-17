@@ -150,7 +150,6 @@ async function canRecognizeFaces(sta) {
 $('#identify').click((e) => {
     console.log("辨識")
     canRecognizeFaces(1);
-    sendMsg('open door');
 });
 
 function loadLabel() {
@@ -204,9 +203,9 @@ function getPosition(element) {
 
 
 // 藍牙設定---------------------------------------------------
-const UART_SERVICE =  "0000fff0-0000-1000-8000-00805f9b34fb";
-const RX_UUID = "0000fff2-0000-1000-8000-00805f9b34fb";
-const TX_UUID = "0000fff1-0000-1000-8000-00805f9b34fb";
+const UART_SERVICE = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+const RX_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+const TX_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
 var BLEDevice = null;
 var UARTService = null;
 
@@ -214,13 +213,13 @@ var UARTService = null;
 async function connectBLE() {
     let opt = {
         // 會搜尋所有藍牙裝置
-        //acceptAllDevices: true,
-        //optionalServices: [UART_SERVICE]
+        acceptAllDevices: true,
+        optionalServices: [UART_SERVICE]
         // 限制搜尋到的藍牙裝置
-        filters: [
-            { namePrefix: 'mike' },
-            { services: [UART_SERVICE] }
-        ],
+        //filters: [
+        //    { namePrefix: 'ESP32' },
+        //    { services: [UART_SERVICE] }
+        //],
     }
 
     try {
